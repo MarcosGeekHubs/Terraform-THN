@@ -1,0 +1,4 @@
+- Error en Permisos del fichero
+    - sudo chmod 400 SSH/id_rsa
+- Conexión
+    - ssh -i ./SSH/id_rsa ubuntu@tu_ip
