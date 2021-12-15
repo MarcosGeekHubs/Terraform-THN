@@ -20,15 +20,16 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 provider "aws" {
-  profile = "sandbox"
+  profile = "Marcos_Palacios"
   region  = "eu-west-1"
 }
 
 variable "users" {
-  type = list(string)
+  type = set(string)
 }
 
 resource "aws_iam_user" "example_user" {
-  count = length(var.users)
-  name = var.users[count.index]
+ // count = length(var.users)
+  for_each = var.users
+  name = each.value
 }
