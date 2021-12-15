@@ -9,8 +9,8 @@ resource "aws_lb" "alb-marcos2" {
 resource "aws_security_group" "alb-sg-marcos" {
   ingress {
     description = "HTTP"
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.lb_port
+    to_port     = var.lb_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
