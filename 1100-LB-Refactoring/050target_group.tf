@@ -19,20 +19,6 @@ resource "aws_lb_target_group" "lb_target_group" {
   }
 }
 
-/*
-resource "aws_lb_target_group_attachment" "my_server1" {
-    target_group_arn = aws_lb_target_group.lb_target_group.arn
-    target_id = aws_instance.my_server1.id
-    port = 80
-}
-
-resource "aws_lb_target_group_attachment" "my_server2" {
-    target_group_arn = aws_lb_target_group.lb_target_group.arn
-    target_id = aws_instance.my_server2.id
-    port = 80
-}
-*/
-
 resource "aws_lb_target_group_attachment" "my_server" {
   for_each = var.severs_system
     target_group_arn = aws_lb_target_group.lb_target_group.arn

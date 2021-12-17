@@ -5,8 +5,6 @@ output "link_dns_public1" {
    "http://${server.public_ip}:${var.server_port}"]
 }
 
-
-
 output "Load-Balancer" {
   description = "Link DNS server 2"
   value       = "http://${aws_lb.alb.dns_name}:${var.lb_port}"

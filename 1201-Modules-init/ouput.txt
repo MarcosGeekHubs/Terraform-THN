@@ -1,0 +1,1 @@
+public_ip = "ec2-3-250-232-100.eu-west-1.compute.amazonaws.com"
