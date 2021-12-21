@@ -39,6 +39,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
   }
 }
 
+/*
 terraform {
     backend "s3" {
         profile="sandbox"
@@ -50,3 +51,4 @@ terraform {
     }
 
 }
+*/
