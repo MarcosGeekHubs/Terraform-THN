@@ -1,0 +1,78 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] data.aws_subnet.public_subnet (expand)" [label = "data.aws_subnet.public_subnet", shape = "box"]
+		"[root] module.load_balancer.aws_lb.alb (expand)" [label = "module.load_balancer.aws_lb.alb", shape = "box"]
+		"[root] module.load_balancer.aws_lb_listener.this (expand)" [label = "module.load_balancer.aws_lb_listener.this", shape = "box"]
+		"[root] module.load_balancer.aws_lb_target_group.this (expand)" [label = "module.load_balancer.aws_lb_target_group.this", shape = "box"]
+		"[root] module.load_balancer.aws_lb_target_group_attachment.servidor (expand)" [label = "module.load_balancer.aws_lb_target_group_attachment.servidor", shape = "box"]
+		"[root] module.load_balancer.aws_security_group.alb (expand)" [label = "module.load_balancer.aws_security_group.alb", shape = "box"]
+		"[root] module.load_balancer.data.aws_vpc.default (expand)" [label = "module.load_balancer.data.aws_vpc.default", shape = "box"]
+		"[root] module.servidores_ec2.aws_instance.servidor (expand)" [label = "module.servidores_ec2.aws_instance.servidor", shape = "box"]
+		"[root] module.servidores_ec2.aws_security_group.mi_grupo_de_seguridad (expand)" [label = "module.servidores_ec2.aws_security_group.mi_grupo_de_seguridad", shape = "box"]
+		"[root] output.dns_load_balancer" [label = "output.dns_load_balancer", shape = "note"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.puerto_servidor" [label = "var.puerto_servidor", shape = "note"]
+		"[root] var.servidores" [label = "var.servidores", shape = "note"]
+		"[root] var.ubuntu_ami" [label = "var.ubuntu_ami", shape = "note"]
+		"[root] data.aws_subnet.public_subnet (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_subnet.public_subnet (expand)" -> "[root] var.servidores"
+		"[root] local.ami (expand)" -> "[root] local.region (expand)"
+		"[root] local.ami (expand)" -> "[root] var.ubuntu_ami"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] local.ami (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.load_balancer (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.servidores_ec2 (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.dns_load_balancer"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] var.puerto_servidor"
+		"[root] module.load_balancer (close)" -> "[root] module.load_balancer.aws_lb_listener.this (expand)"
+		"[root] module.load_balancer (close)" -> "[root] module.load_balancer.aws_lb_target_group_attachment.servidor (expand)"
+		"[root] module.load_balancer (close)" -> "[root] module.load_balancer.output.dns_load_balancer (expand)"
+		"[root] module.load_balancer.aws_lb.alb (expand)" -> "[root] module.load_balancer.aws_security_group.alb (expand)"
+		"[root] module.load_balancer.aws_lb.alb (expand)" -> "[root] module.load_balancer.var.subnet_ids (expand)"
+		"[root] module.load_balancer.aws_lb_listener.this (expand)" -> "[root] module.load_balancer.aws_lb.alb (expand)"
+		"[root] module.load_balancer.aws_lb_listener.this (expand)" -> "[root] module.load_balancer.aws_lb_target_group.this (expand)"
+		"[root] module.load_balancer.aws_lb_target_group.this (expand)" -> "[root] module.load_balancer.data.aws_vpc.default (expand)"
+		"[root] module.load_balancer.aws_lb_target_group.this (expand)" -> "[root] module.load_balancer.var.puerto_lb (expand)"
+		"[root] module.load_balancer.aws_lb_target_group.this (expand)" -> "[root] module.load_balancer.var.puerto_servidor (expand)"
+		"[root] module.load_balancer.aws_lb_target_group_attachment.servidor (expand)" -> "[root] module.load_balancer.aws_lb_target_group.this (expand)"
+		"[root] module.load_balancer.aws_lb_target_group_attachment.servidor (expand)" -> "[root] module.load_balancer.var.instancia_ids (expand)"
+		"[root] module.load_balancer.aws_security_group.alb (expand)" -> "[root] module.load_balancer.var.puerto_lb (expand)"
+		"[root] module.load_balancer.aws_security_group.alb (expand)" -> "[root] module.load_balancer.var.puerto_servidor (expand)"
+		"[root] module.load_balancer.aws_security_group.alb (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] module.load_balancer.data.aws_vpc.default (expand)" -> "[root] module.load_balancer (expand)"
+		"[root] module.load_balancer.data.aws_vpc.default (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] module.load_balancer.output.dns_load_balancer (expand)" -> "[root] module.load_balancer.aws_lb.alb (expand)"
+		"[root] module.load_balancer.var.instancia_ids (expand)" -> "[root] module.load_balancer (expand)"
+		"[root] module.load_balancer.var.instancia_ids (expand)" -> "[root] module.servidores_ec2.output.instancia_ids (expand)"
+		"[root] module.load_balancer.var.puerto_lb (expand)" -> "[root] local.puerto_lb (expand)"
+		"[root] module.load_balancer.var.puerto_lb (expand)" -> "[root] module.load_balancer (expand)"
+		"[root] module.load_balancer.var.puerto_servidor (expand)" -> "[root] local.puerto_servidor (expand)"
+		"[root] module.load_balancer.var.puerto_servidor (expand)" -> "[root] module.load_balancer (expand)"
+		"[root] module.load_balancer.var.subnet_ids (expand)" -> "[root] data.aws_subnet.public_subnet (expand)"
+		"[root] module.load_balancer.var.subnet_ids (expand)" -> "[root] module.load_balancer (expand)"
+		"[root] module.servidores_ec2 (close)" -> "[root] module.servidores_ec2.output.instancia_ids (expand)"
+		"[root] module.servidores_ec2.aws_instance.servidor (expand)" -> "[root] module.servidores_ec2.aws_security_group.mi_grupo_de_seguridad (expand)"
+		"[root] module.servidores_ec2.aws_instance.servidor (expand)" -> "[root] module.servidores_ec2.var.ami_id (expand)"
+		"[root] module.servidores_ec2.aws_instance.servidor (expand)" -> "[root] module.servidores_ec2.var.servidores (expand)"
+		"[root] module.servidores_ec2.aws_instance.servidor (expand)" -> "[root] module.servidores_ec2.var.tipo_instancia (expand)"
+		"[root] module.servidores_ec2.aws_security_group.mi_grupo_de_seguridad (expand)" -> "[root] module.servidores_ec2.var.puerto_servidor (expand)"
+		"[root] module.servidores_ec2.aws_security_group.mi_grupo_de_seguridad (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] module.servidores_ec2.output.instancia_ids (expand)" -> "[root] module.servidores_ec2.aws_instance.servidor (expand)"
+		"[root] module.servidores_ec2.var.ami_id (expand)" -> "[root] local.region (expand)"
+		"[root] module.servidores_ec2.var.ami_id (expand)" -> "[root] module.servidores_ec2 (expand)"
+		"[root] module.servidores_ec2.var.ami_id (expand)" -> "[root] var.ubuntu_ami"
+		"[root] module.servidores_ec2.var.puerto_servidor (expand)" -> "[root] local.puerto_servidor (expand)"
+		"[root] module.servidores_ec2.var.puerto_servidor (expand)" -> "[root] module.servidores_ec2 (expand)"
+		"[root] module.servidores_ec2.var.servidores (expand)" -> "[root] data.aws_subnet.public_subnet (expand)"
+		"[root] module.servidores_ec2.var.servidores (expand)" -> "[root] module.servidores_ec2 (expand)"
+		"[root] module.servidores_ec2.var.tipo_instancia (expand)" -> "[root] module.servidores_ec2 (expand)"
+		"[root] output.dns_load_balancer" -> "[root] module.load_balancer.output.dns_load_balancer (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.load_balancer.aws_lb_listener.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.load_balancer.aws_lb_target_group_attachment.servidor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] local.region (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
